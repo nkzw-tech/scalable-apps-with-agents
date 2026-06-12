@@ -1,0 +1,29 @@
+{
+  "name": "building-scalable-apps-with-agents-talk",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "build": "vp build",
+    "deploy": "void deploy --project scalable-apps-with-agents",
+    "dev": "vp dev",
+    "prepare": "vp config"
+  },
+  "dependencies": {
+    "@nkzw/liquid-glass": "^1.3.0",
+    "@nkzw/remdx": "^20.0.0",
+    "framer-motion": "^12.40.0",
+    "js-confetti": "^0.13.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@nkzw/vite-plugin-remdx": "^20.0.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.2",
+    "vite": "npm:@voidzero-dev/vite-plus-core@^0.1.19",
+    "vite-plus": "latest",
+    "void": "^0.9.3"
+  },
+  "packageManager": "pnpm@11.7.0"
+}

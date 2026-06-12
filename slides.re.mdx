@@ -1,0 +1,884 @@
+export { Components } from "./Components.tsx";
+export { Container } from "./Components.tsx";
+export { Themes } from "./Themes.tsx";
+
+--
+
+image: /Cover1.jpg
+
+--
+
+<Visible>
+  <Center>
+    <LiquidGlass saturation={192}>
+      <QRCode width={500} height={500} />
+    </LiquidGlass>
+  </Center>
+</Visible>
+
+---
+
+theme: dark
+
+--
+
+<Visible>
+  <Center>
+    <div
+      style={{
+        display: "grid",
+        gap: 0,
+        gridTemplateColumns: "repeat(2, 1fr)",
+        gridTemplateRows: "repeat(2, 1fr)",
+        position: "absolute",
+        inset: 0,
+      }}
+    >
+      <Video className="video-intro" src="/AC.mp4" />
+      <Video className="video-intro" src="/IntroReactNative.mp4" style={{ height: "101%" }} />
+      <Video className="video-intro" src="/IntroTalk.mp4" style={{ height: "94%" }} />
+      <Video className="video-intro" src="/IntroJest.mp4" />
+    </div>
+  </Center>
+</Visible>
+
+---
+
+image: /VoidZero.png
+
+--
+
+---
+
+image: /VoidZeroCf.png
+
+--
+
+---
+
+image: /Cover2.jpg
+
+--
+
+<Visible>
+  <Center>
+    <LiquidGlass>
+      <div
+        className="title alternate"
+        style={{
+          width: 1000,
+          fontSize: "3.8em",
+        }}
+      >
+        Building Scalable Applications
+      </div>
+    </LiquidGlass>
+  </Center>
+</Visible>
+
+---
+
+image: /Cover2.jpg
+transition: leaveOnly
+--
+
+<Visible>
+  <Center>
+    <LiquidGlass>
+      <div
+        className="title alternate"
+        style={{
+          width: 1000,
+          fontSize: "3.8em",
+        }}
+      >
+        Building Scalable Apps _with Agents_
+      </div>
+    </LiquidGlass>
+  </Center>
+</Visible>
+
+---
+
+image: /Cover2.jpg
+transition: leaveOnly
+--
+
+<Visible>
+  <Center>
+    <LiquidGlass>
+      <div
+        className="title orange-fade"
+        style={{
+          width: 1000,
+          fontSize: "3.8em",
+        }}
+      >
+        Building Scalable Apps _with Agents_
+      </div>
+    </LiquidGlass>
+  </Center>
+</Visible>
+
+---
+
+# What does that mean?
+
+- _Agents write code now_
+- Like, actually all of it.
+
+_→ But apps are more than code_
+
+---
+
+image: /Cover3.jpg
+
+--
+
+<Visible>
+  <Center>
+    <LiquidGlass>
+      <div
+        className="title regular"
+        style={{
+          width: 800,
+          fontSize: "3.5em",
+        }}
+      >
+        Where do I even start?
+      </div>
+    </LiquidGlass>
+  </Center>
+</Visible>
+
+---
+
+# Let's build an app
+
+<Center>
+  Vue? React? Which Router? Which List View? Which data framework? How to make it fast? How should I
+  style my components? Which packages do I need to install? How do I build it? i18n
+  のやり方は何ですか? How do I set up &lt;anything&gt;? CJS, ESM? …? Auth? Deployments? Live
+  updates? _Too many decisions._
+</Center>
+
+---
+
+image: /Cover4.jpg
+
+--
+
+<Visible>
+  <Center>
+    <LiquidGlass saturation={124}>
+      <div
+        className="title no-color"
+        style={{
+          width: 200,
+          fontSize: "3.5em",
+        }}
+      >
+        VOID.
+      </div>
+    </LiquidGlass>
+  </Center>
+</Visible>
+
+---
+
+# What is Void?
+
+- A Vite plugin
+- A backend SDK
+- A deployment platform
+
+→ _Source describes the infrastructure_
+
+---
+
+# One Plugin
+
+<Center>
+
+<div style={{fontSize: '0.7em'}}>
+
+```ts
+import { voidVue } from "@void/vue/plugin";
+import { defineConfig } from "vite";
+import { voidPlugin } from "void";
+
+export default defineConfig({
+  plugins: [voidPlugin(), voidVue()],
+});
+```
+
+</div>
+
+</Center>
+
+---
+
+# Code is Infrastructure
+
+<Center>
+
+<div>
+
+<div style={{fontSize: '0.68em'}}>
+
+```ts
+import { db } from "void/db"; // Database
+import { kv } from "void/kv"; // Key-value storage
+import { storage } from "void/storage"; // Object storage
+import { ai } from "void/ai"; // AI inference
+```
+
+</div>
+
+<div style={{paddingTop: 20}}>
+<Center>
+
+_`void deploy` provisions what is actually used!_
+
+</Center>
+
+</div>
+</div>
+
+</Center>
+
+---
+
+# The Platform
+
+- Local dev runs in `workerd`
+- Deploys run migrations automatically
+- Static assets are served from the edge
+- Projects, domains, secrets, routing, and logs are managed by Void
+
+→ _No Cloudflare account required_
+
+---
+
+transition: leaveOnly
+
+--
+
+# The Platform
+
+- Local dev runs in `workerd`
+- Deploys run migrations automatically
+- Static assets are served from the edge
+- Projects, domains, secrets, routing, and logs are managed by Void
+
+→ _Maybe: <del>No Cloudflare account required</del>_
+
+---
+
+image: /Cover7.jpg
+
+--
+
+<Visible>
+  <Center>
+    <LiquidGlass saturation={124}>
+      <div
+        className="title regular"
+        style={{
+          width: 560,
+          fontSize: "3.5em",
+        }}
+      >
+        Full Stack Vue
+      </div>
+    </LiquidGlass>
+  </Center>
+</Visible>
+
+---
+
+# Vue Pages
+
+- File routes in `pages/`
+- Server loaders next to components
+- SSR on first load
+- SPA navigation after hydration
+
+---
+
+# Server Loader
+
+<div style={{fontSize: '0.6em', alignSelf: 'center'}}>
+
+```ts
+// pages/users.server.ts
+import { defineHandler, type InferProps } from "void";
+import { db } from "void/db";
+import { users } from "@schema";
+
+export type Props = InferProps<typeof loader>;
+
+export const loader = defineHandler(async () => ({
+  users: await db.select().from(users),
+}));
+```
+
+</div>
+
+---
+
+# Vue Page
+
+<div style={{fontSize: '0.58em', alignSelf: 'center'}}>
+
+```vue
+<!-- pages/users.vue -->
+<script setup lang="ts">
+import type { Props } from "./users.server";
+
+defineProps<Props>();
+</script>
+
+<template>
+  <h1>Users</h1>
+  <ul>
+    <li v-for="user in users" :key="user.id">{{ user.name }}</li>
+  </ul>
+</template>
+```
+
+</div>
+
+---
+
+# Typed Forms
+
+<div style={{fontSize: '0.58em', alignSelf: 'center'}}>
+
+```vue
+<script setup lang="ts">
+import { useForm } from "@void/vue";
+
+const form = useForm("/users/create", { name: "", email: "" });
+</script>
+
+<template>
+  <form @submit.prevent="form.post()">
+    <input v-model="form.data.name" />
+    <span v-if="form.errors.name">{{ form.errors.name }}</span>
+    <button :disabled="form.pending">Create</button>
+  </form>
+</template>
+```
+
+</div>
+
+---
+
+image: /Cover8.jpg
+
+--
+
+<Visible>
+  <Center>
+    <LiquidGlass saturation={124}>
+      <div
+        className="title regular"
+        style={{
+          width: 720,
+          fontSize: "3.5em",
+        }}
+      >
+        Async Rendering
+      </div>
+    </LiquidGlass>
+  </Center>
+</Visible>
+
+---
+
+# Void Supports Async React
+
+- React Pages navigations are scheduled as transitions
+- Route data, layouts, component modules, and deferred props become resources (`use`)
+- React 19 streams SSR with `Suspense`
+- Forms use native React Actions
+
+---
+
+# Deferred Props
+
+<div style={{fontSize: '0.62em', alignSelf: 'center'}}>
+
+```ts {3}
+export const loader = defineHandler(async () => ({
+  projects: await db.select().from(projects),
+  metrics: defer(fetchProjectMetrics),
+}));
+```
+
+</div>
+
+---
+
+# In React
+
+<div style={{fontSize: '0.58em', alignSelf: 'center'}}>
+
+```tsx {4}
+import { Suspense, use } from "react";
+
+function Metrics({ metrics }: Pick<Props, "metrics">) {
+  const resolved = use(metrics);
+  return <p>{resolved.requests} requests</p>;
+}
+
+export default function Dashboard({ metrics }: Props) {
+  return (
+    <Suspense fallback={<p>Loading metrics...</p>}>
+      <Metrics metrics={metrics} />
+    </Suspense>
+  );
+}
+```
+
+</div>
+
+---
+
+# In Vue
+
+<div style={{fontSize: '0.5em', alignSelf: 'center'}}>
+
+```vue
+<template>
+  <p v-if="metrics.loading">Loading metrics...</p>
+  <p v-else-if="metrics.error">Error: {{ metrics.error.message }}</p>
+  <p v-else>{{ metrics.value.requests }} requests</p>
+</template>
+```
+
+</div>
+
+---
+
+image: /Cover11.jpg
+
+--
+
+<Visible>
+  <Center>
+    <LiquidGlass>
+      <div
+        className="title regular"
+        style={{
+          width: 900,
+          fontSize: "3.5em",
+        }}
+      >
+        Can we do even better?
+      </div>
+    </LiquidGlass>
+  </Center>
+</Visible>
+---
+
+image: /Cover9.jpg
+
+--
+
+<Visible>
+  <Center>
+    <LiquidGlass saturation={192}>
+      <div
+        children={<img className="fate-logo" src="/fate-logo.svg" />}
+        style={{
+          width: "600px",
+          height: "200px",
+          paddingBottom: 32,
+        }}
+      />
+    </LiquidGlass>
+  </Center>
+</Visible>
+
+---
+
+# What is <Lowercase>_fate_</Lowercase>?
+
+- A modern data client inspired by Relay and GraphQL
+- View composition
+- Normalized cache
+- Data masking
+- Pagination, live views, and optimistic updates
+
+→ _[fate.technology](https://fate.technology)_
+
+---
+
+# Defining Views
+
+<div style={{fontSize: '0.62em', alignSelf: 'center'}}>
+
+```ts {4,10}
+import type { Post, User } from "@app/fate/views";
+import { view } from "react-fate";
+
+export const UserView = view<User>()({
+  id: true,
+  name: true,
+  username: true,
+});
+
+export const PostView = view<Post>()({
+  author: UserView,
+  id: true,
+  title: true,
+});
+```
+
+</div>
+
+---
+
+# Reading Views
+
+<div style={{fontSize: '0.58em', alignSelf: 'center'}}>
+
+```tsx {5,6}
+import { useView, type ViewRef } from "react-fate";
+import { PostView, UserView } from "../src/fateViews";
+
+function PostCard({ post: postRef }: { post: ViewRef<"Post"> }) {
+  const post = useView(PostView, postRef);
+  const author = useView(UserView, post.author);
+
+  return (
+    <article>
+      <h2>{post.title}</h2>
+      <p>By {author.name}</p>
+    </article>
+  );
+}
+```
+
+</div>
+
+---
+
+# One Request per Screen
+
+<div style={{fontSize: '0.58em', alignSelf: 'center'}}>
+
+```tsx {5}
+import { useRequest } from "react-fate";
+import { PostView } from "../src/fateViews";
+
+export default function HomePage() {
+  const { posts } = useRequest({ posts: { list: PostView } });
+
+  return (
+    <div>
+      {posts.map((post) => (
+        <PostCard key={post.id} post={post} />
+      ))}
+    </div>
+  );
+}
+```
+
+</div>
+
+---
+
+# Optimistic Updates
+
+<div style={{fontSize: '0.52em', alignSelf: 'center'}}>
+
+```tsx {3,8,9,10,11}
+function LikeButton({ post }: { post: Post }) {
+  const fate = useFateClient();
+  const [, like] = useActionState(fate.actions.post.like, null);
+
+  return (
+    <button
+      action={() =>
+        like({
+          input: { id: post.id },
+          optimistic: { likes: post.likes + 1 },
+        })
+      }
+    >
+      Like
+    </button>
+  );
+}
+```
+
+</div>
+
+---
+
+image: /Cover5.jpg
+
+--
+
+<Visible>
+  <Center>
+    <LiquidGlass>
+      <div
+        className="title regular"
+        style={{
+          width: 760,
+          fontSize: "3.5em",
+        }}
+      >
+        Why should you care?
+      </div>
+    </LiquidGlass>
+  </Center>
+</Visible>
+
+---
+
+image: /Cover13.jpg
+
+--
+
+<Visible>
+  <Center>
+    <LiquidGlass>
+      <div
+        className="title regular"
+        style={{
+          width: 760,
+          fontSize: "3.5em",
+        }}
+      >
+        _fate_ supports Vue
+      </div>
+    </LiquidGlass>
+  </Center>
+</Visible>
+
+---
+
+# Requesting Data
+
+<div style={{fontSize: '0.58em', alignSelf: 'center'}}>
+
+```vue {5,8}
+<script setup lang="ts">
+import { useListView, useRequest } from "vue-fate";
+import { PostConnectionView } from "../src/fateViews";
+
+const { posts: postsRef } = await useRequest({
+  posts: { list: PostConnectionView },
+}).ready();
+const [posts, loadNext] = useListView(PostConnectionView, postsRef);
+</script>
+
+<template>
+  <PostCard v-for="{ node } in posts" :key="node.id" :post="node" />
+  <button v-if="loadNext" @click="loadNext()">Load more</button>
+</template>
+```
+
+</div>
+
+---
+
+# Reading Views
+
+<div style={{fontSize: '0.58em', alignSelf: 'center'}}>
+
+```vue {7,8}
+<script setup lang="ts">
+import type { ViewRef } from "vue-fate";
+import { useView } from "vue-fate";
+import { PostView, UserView } from "../src/fateViews";
+
+const props = defineProps<{ post: ViewRef<"Post"> }>();
+const post = useView(PostView, () => props.post);
+const author = useView(UserView, () => post.value?.author ?? null);
+</script>
+<template>
+  <article v-if="post">
+    <h2>{{ post.title }}</h2>
+    <p v-if="author">By {{ author.name }}</p>
+  </article>
+</template>
+```
+
+</div>
+
+---
+
+image: /Cover14.jpg
+
+--
+
+<Visible>
+  <Center>
+    <LiquidGlass saturation={124}>
+      <div
+        className="title regular"
+        style={{
+          width: 460,
+          fontSize: "3.5em",
+        }}
+      >
+        Live Data
+      </div>
+    </LiquidGlass>
+  </Center>
+</Visible>
+
+---
+
+# Live Views
+
+<div style={{fontSize: '0.66em', alignSelf: 'center'}}>
+
+```ts {3,10}
+const post = useView(PostView, () => props.post);
+// ↓
+const post = useLiveView(PostView, () => props.post);
+
+const [comments] = useListView(CommentConnectionView, () => post.value?.comments);
+// ↓
+const [comments] = useLiveListView(CommentConnectionView, () => post.value?.comments);
+```
+
+</div>
+
+---
+
+image: /Cover14.jpg
+
+--
+
+<Visible>
+  <Center>
+    <LiquidGlass saturation={124}>
+      <div
+        className="title regular"
+        style={{
+          width: 720,
+          fontSize: "3.5em",
+        }}
+      >
+        Void + _fate_
+      </div>
+    </LiquidGlass>
+  </Center>
+</Visible>
+
+---
+
+# Void Transport
+
+<div style={{fontSize: '0.64em', alignSelf: 'center'}}>
+
+```ts
+import { fate } from "vue-fate/vite";
+
+export default defineConfig({
+  plugins: [
+    voidPlugin(),
+    voidVue(),
+    fate({
+      module: "./src/fate/server.ts",
+      transport: "void",
+    }),
+  ],
+});
+```
+
+</div>
+
+---
+
+# Full Stack
+
+- SSR calls the fate server directly
+- Browser requests go to `/fate`
+- Live updates go through `/fate-live`
+- Void handles the runtime, database, live stream, and deploy
+- _fate_ owns component data, cache, pagination, live views, and mutations
+
+---
+
+theme: dark
+
+--
+
+<Center>
+
+_**Demo**_
+
+</Center>
+
+---
+
+image: /Cover6.jpg
+
+--
+
+<Visible>
+  <Center>
+    <LiquidGlass saturation={192}>
+      <FunDemoQRCode width={500} height={500} />
+    </LiquidGlass>
+  </Center>
+</Visible>
+
+---
+
+# _tl;dl:_
+
+- _Agents write all the code_
+- Code declares the infrastructure
+- Components declare their data needs
+- Void connects the pieces automatically
+
+<div style={{ paddingTop: 20 }}>→ _Build **scalable high-quality apps** in very little time!_</div>
+
+---
+
+# _ts;wm:_ <Lowercase>[cpojer.net](https://cpojer.net)</Lowercase>
+
+<img src="/modern-eng-values.png" />
+
+---
+
+<h1 className="alternate">
+  R<Lowercase>e</Lowercase>MDX
+</h1>
+
+- This talk was created using <span className="alternate">**R<Lowercase>e</Lowercase>MDX**</span>
+- It's hosted on Void!
+- **Slides:** [scalable-apps-with-agents.nakazawa.dev](https://scalable-apps-with-agents.nakazawa.dev)
+- **Source:**
+  [`nkzw-tech/scalable-apps-with-agents-talk`](https://github.com/nkzw-tech/scalable-apps-with-agents-talk)
+- **Beautiful React & MDX Presentations:** [`nkzw-tech/remdx`](https://github.com/nkzw-tech/remdx)
+
+---
+
+image: /Cover1.jpg
+
+--
+
+<Visible>
+  <Center>
+    <LiquidGlass saturation={192}>
+      <div
+        children={<Logo />}
+        style={{
+          width: "600px",
+          height: "200px",
+        }}
+      />
+    </LiquidGlass>
+  </Center>
+</Visible>
